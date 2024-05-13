@@ -11,8 +11,8 @@ public class Quadro {
         this.horario=horario;
     }
 
-    public void frequencia(Turma turma, Aluno aluno){
-        for(int i=0;i<turma.qtdAlunos;i++){
+    public void frequencia(Turma turma, Aluno aluno, QtdAlunos qtdAlunos){
+        for(int i=0;i<qtdAlunos.qtdAlunos;i++){
             if(turma.membros[i]==aluno.nome){
                 System.out.println(aluno.nome + " estava presente no dia " + data + " às " + horario + "?");
                 Scanner ler = new Scanner(System.in);
