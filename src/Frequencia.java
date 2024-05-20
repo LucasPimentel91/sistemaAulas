@@ -8,4 +8,11 @@ public class Frequencia {
     public void cadastrar(Boolean status){
         this.status = status;
     }
+
+    public Quadro setQuadro(){
+        return diaHora;
+    }
+    public void validarFreq(){
+        status = true;
+    }
 }

@@ -23,9 +23,15 @@ public class Aluno {
         this.nota = nota;
     }
 
-    public Frequencia setDiaHora(String data, String hora){
+    public int setNota(){
+        return nota;
+    }
+
+    public void setDiaHora(Quadro quadro){
         for(int a=0;a<statusPresenca.size();a++){
-            if
+            if(statusPresenca.get(a).setQuadro() == quadro){
+                statusPresenca.get(a).validarFreq();
+            }
         }
     }
 

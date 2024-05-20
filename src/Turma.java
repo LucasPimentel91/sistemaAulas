@@ -10,6 +10,10 @@ public class Turma {
     private ArrayList<Quadro> cronograma = new ArrayList<>();
 
 
+    public String setCodigo(){
+        return codigo;
+    }
+
     public void cadastrar(String codigo, String nome){
         this.codigo=codigo;
         this.nome=nome;
@@ -29,21 +33,30 @@ public class Turma {
         }
     }
 
-    public void frequenciaAlunos(String data, String hora){
+    public void listarAlunos(){
+        for(int i=0;i<scanMembro.size();i++){
+            System.out.println(scanMembro.get(i).nome);
+        }
+    }
+    public void listarNotas(){
+        for(int i=0;i<scanMembro.size();i++){
+            System.out.println(scanMembro.get(i).nome + "- nota: " + scanMembro.get(i).setNota());
+        }
+    }
+
+    public void frequenciaAlunos(){
         for(int i=0;i< cronograma.size();i++){
-            if(Objects.equals(cronograma.get(i).data, data)){
-                if(Objects.equals(cronograma.get(i).horario, hora)){
-                    for(int a=0;a< scanMembro.size();a++){
+            System.out.println(cronograma.get(i).data + " " + cronograma.get(i).horario);
+            for(int a=0;a< scanMembro.size();a++){
                         Scanner ler = new Scanner(System.in);
                         System.out.println(scanMembro.get(i).nome + " presente? (sim/nao)");
                         String resp = ler.nextLine();
                         if(resp == "sim"){
-                            for(int o=0;o< scanMembro.get(i).status)
+                            scanMembro.get(a).setDiaHora(cronograma.get(i));
                         }
                     }
-                }
-            }
         }
+
     }
 
     public void avaliacao(){
