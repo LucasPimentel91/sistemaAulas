@@ -1,20 +1,11 @@
-import java.util.Scanner;
-
 public class Frequencia {
-    Scanner ler = new Scanner(System.in);
+    private Quadro diaHora;
+    private Boolean status;
 
-    private String[] estudantes;
-    private String[] turma;
-    private String[] frequencia;
-
-    public void registrar(String[] alunos, String[] diaAula){
-        String presenca;
-        for(String aluno: alunos){
-            for(int i=0;i<alunos.length;i++){
-                System.out.print(aluno + "estava presente em" + diaAula[i] + "?");
-                presenca = ler.nextLine();
-                this.frequencia[i] = presenca;
-            }
-        }
+    public void cadastrar(Quadro diaHora){
+        this.diaHora = diaHora;
+    }
+    public void cadastrar(Boolean status){
+        this.status = status;
     }
 }

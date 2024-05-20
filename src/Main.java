@@ -2,10 +2,12 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
+import static java.lang.foreign.MemoryAddress.NULL;
+
 
 public class Main {
-    static ArrayList<Aluno> listAluno = new ArrayList<>();
     static ArrayList<Turma> listTurma = new ArrayList<>();
+
 
     private static int cabecalho(){
         Scanner ler = new Scanner(System.in);
@@ -57,9 +59,13 @@ public class Main {
         return ler.nextInt();
     }
 
-    public static void listarTurmas(){
-        for
-    }
+    public static Turma searchTurmas(ArrayList<Turma> arr, String nome){
+        for(Turma turma:arr){
+            if(Objects.equals(turma.nome, nome)){
+                return turma;
+            }
+        }
+
 
     public static void main(String[] args){
         int num=1;
@@ -69,16 +75,27 @@ public class Main {
                 System.out.println("Encerrando o sistema!");
             }else if(cabecalho() == 1){
                 if(cabecalhoCadastro() == 1){
+                    if(listTurma.isEmpty()){
+                        System.out.println("EFETUE O CADASTRADO DE UMA TURMA PARA ADICIONAR ESSE ALUNO.");
+                    }
                     Scanner ler = new Scanner(System.in);
                     Aluno aluno = new Aluno();
                     System.out.println("Nome completo: ");
-                    String nome = ler.nextLine();
+                    String nomeTurma = ler.nextLine();
                     System.out.println("Matrícula: (somente número!)");
                     int matricula = ler.nextInt();
                     System.out.println("Data de nascimento: ");
                     String data = ler.nextLine();
-                    aluno.cadastrar(nome, matricula, data);
-                    listAluno.add(aluno);
+                    aluno.cadastrar(nomeTurma, matricula, data);
+                    String resp = "s";
+                    do{
+                        Scanner scan = new Scanner(System.in);
+                        System.out.println("Digite o nome da turma: ");
+                        String pesquisa = scan.nextLine();
+                        searchTurmas(listTurma, pesquisa).cadastrar(aluno);
+                        System.out.println("Digite -s- para cadastrar em outra turma: ");
+                        resp = scan.nextLine();
+                    }while(!resp.equals("s"));
                 }
                 else if(cabecalhoCadastro() == 2){
                     Scanner ler = new Scanner(System.in);
@@ -88,30 +105,53 @@ public class Main {
                     System.out.println("Código: ");
                     String code = ler.nextLine();
                     turma.cadastrar(code, nome);
+                    listTurma.add(turma);
                 }
                 else if(cabecalhoCadastro() == 3){
                     Scanner ler = new Scanner(System.in);
-                    Quadro dataHora = new Quadro();
+                    Quadro quadro = new Quadro();
+                    Frequencia frequencia = new Frequencia();
                     System.out.println("Data: ");
                     String data = ler.nextLine();
                     System.out.println("Horário: ");
                     String hora = ler.nextLine();
-                    System.out.println("Nome da Turma: ");
-                    String turma = ler.nextLine();
-                    dataHora.registrar(data, hora, turma);
+                    quadro.registrar(data, hora);
+                    frequencia.cadastrar(quadro);
                     String resp = "s";
+                    do{
+                        Scanner scan = new Scanner(System.in);
+                        System.out.println("Digite o nome da turma desse quadro-horário: ");
+                        String nomeTurma = scan.nextLine();
+                        searchTurmas(listTurma, nomeTurma).cadastrar(quadro);
+                        searchTurmas(listTurma, nomeTurma).setMembroFreq(frequencia);
+                        System.out.println("Digite -s- para cadastrar em outra turma: ");
+                        resp = scan.nextLine();
+                    }while(!resp.equals("s"));
                 }
             }else if(cabecalho() == 2){
                 if(cabecalhoRegistro() == 1){
-                    Scanner resposta = new Scanner(System.in);
-                    System.out.println("Qual data da aula: ");
-                    String data = resposta.nextLine();
-                    System.out.println("Qual horário: ");
-                    String hora = resposta.nextLine();
+                    String resp = "s";
+                    do{
+                        Scanner scan = new Scanner(System.in);
+                        System.out.println("Digite o nome da turma desse quadro-horário: ");
+                        String nomeTurma = scan.nextLine();
+                        searchTurmas(listTurma, nomeTurma).avaliacao();
+                        System.out.println("Digite -s- para avaliar outra turma: ");
+                        resp = scan.nextLine();
+                    }while(!resp.equals("s"));
 
                 }
                 else if(cabecalhoRegistro() == 2){
-
+                    String resp = "s";
+                    do{
+                        Scanner scan = new Scanner(System.in);
+                        System.out.println("Digite o nome da turma desse quadro-horário: ");
+                        String nomeTurma = scan.nextLine();
+                        System.out.println("Horários registrados de " + nomeTurma);
+                        searchTurmas(listTurma, nomeTurma).setQuadros();
+                        System.out.println("Digite -s- para avaliar outra turma: ");
+                        resp = scan.nextLine();
+                    }while(!resp.equals("s"));
                 }
             }
             else if(cabecalho() == 3){

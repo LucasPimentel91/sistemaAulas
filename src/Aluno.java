@@ -1,10 +1,12 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Aluno {
-    private String nome;
+    public String nome;
     private int matricula;
     private String dataNascimento;
-    private String turmaMembro;
+    private int nota;
+    private ArrayList<Frequencia> statusPresenca = new ArrayList<>();
 
     Scanner ler = new Scanner(System.in);
 
@@ -13,8 +15,18 @@ public class Aluno {
         this.matricula=matricula;
         this.dataNascimento=data;
     }
-    public void cadastrarTurma (String turma){
-        this.turmaMembro = turma;
+    public void registroDiasHoras(Frequencia frequencia){
+        statusPresenca.add(frequencia);
+    }
+
+    public void scanNota(int nota){
+        this.nota = nota;
+    }
+
+    public Frequencia setDiaHora(String data, String hora){
+        for(int a=0;a<statusPresenca.size();a++){
+            if
+        }
     }
 
 }
