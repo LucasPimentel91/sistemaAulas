@@ -1,13 +1,21 @@
-public class Aluno {
-    public String nome;
-    public String matricula;
-    private String dataNascimento;
-    public boolean presenca;
+import java.util.Scanner;
 
-    public void cadastrar(String nome, String matricula, String data){
+public class Aluno {
+    private String nome;
+    private int matricula;
+    private String dataNascimento;
+    private String turmaMembro;
+
+    Scanner ler = new Scanner(System.in);
+
+    public void cadastrar(String nome, int matricula, String data){
         this.nome=nome;
         this.matricula=matricula;
         this.dataNascimento=data;
     }
+    public void cadastrarTurma (String turma){
+        this.turmaMembro = turma;
+    }
+
 }
 
